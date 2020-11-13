@@ -1,4 +1,3 @@
-
 const express = require('express');
 const path = require('path');
 require('dotenv').config();
@@ -8,16 +7,8 @@ const app = express();
 
 // Node Server
 const server = require('http').createServer(app);
-const io = require('socket.io')(server);
-
-// Mensajes de sockets
-io.on('connection', client => {
-    console.log('Cliente conectado');
-
-    client.on('disconnect', () => { 
-        console.log('Cliente desconectado') 
-    });
-});
+module.exports.io = require('socket.io')(server);
+require('./sockets/socket');
 
 // Path público
 const publicPath = path.resolve( __dirname, 'public' );
